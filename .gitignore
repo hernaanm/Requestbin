@@ -4,6 +4,7 @@
 serviced.log
 
 codekit-config.json
+back-tests
 
 # Mac Files
 **/.DS_Store

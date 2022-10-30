@@ -1,0 +1,117 @@
+{
+	"type": "object",
+	"required": [
+		"data"
+	],
+	"properties": {
+		"data": {
+			"type": "object",
+			"required": [
+				"schedulePackage"
+			],
+			"properties": {
+				"schedulePackage": {
+					"type": "object",
+					"required": [
+						"success",
+						"error",
+						"package"
+					],
+					"properties": {
+						"success": {
+							"type": "boolean",
+							"default": true
+						},
+						"error": {
+							"type": ["null","string"]
+						},
+						"package": {
+							"type": "object",
+							"required": [
+								"id",
+								"deliveries",
+								"status",
+								"createdAt",
+								"ref"
+							],
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"deliveries": {
+									"type": "array",
+									"items":{
+										"type": "object",
+										"required": [
+											"tasks"
+										],
+										"properties": {
+											"tasks": {
+												"type": "array",
+												"items":{
+													"type": "object",
+													"required": [
+														"type",
+														"address"
+													],
+													"properties": {
+														"type": {
+															"type": "string"
+														},
+														"address": {
+															"type": "object",
+															"required": [
+																"geocoded",
+																"location"
+															],
+															"properties": {
+																"geocoded": {
+																	"type": "string"
+																},
+																"location": {
+																	"type": "object",
+																	"required": [
+																		"lat",
+																		"long"
+																	],
+																	"properties": {
+																		"lat": {
+																			"type": "string"
+																		},
+																		"long": {
+																			"type": "string"
+																		}
+																	}
+																}
+
+															}
+														}
+
+													}
+												}
+
+											}
+										}
+									}
+
+								},
+								"status": {
+									"type": "string"
+								},
+								"createdAt": {
+									"type": "string"
+								},
+								"ref": {
+									"type": "string"
+								}
+							}
+						}
+
+					}
+				}
+
+			}
+		}
+
+	}
+}
