@@ -22,8 +22,8 @@ class RedisStorage():
     def _request_count_key(self):
         return '{}-requests'.format(self.prefix)
 
-    def create_bin(self, private=False):
-        bin = Bin(private)
+    def create_bin(self, private=False, custom_key=None):
+        bin = Bin(private, custom_key)
         key = self._key(bin.name)
         self.redis.set(key, bin.dump())
         self.redis.expireat(key, int(bin.created+self.bin_ttl))

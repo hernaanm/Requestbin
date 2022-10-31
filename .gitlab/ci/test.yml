@@ -1,0 +1,19 @@
+test-job:
+  stage: test
+  resource_group: requestbin
+  services:
+    - name: docker:dind
+  variables:
+    DOCKER_HOST: "tcp://docker:2375/"
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+    BASE_URL: "http://docker:8888"
+  before_script:
+    - !reference [ .install-docker, before_script ]
+    - !reference [ .install-docker-compose, before_script ]
+    - !reference [ .deploy-requestbin-container, before_script ]
+    - !reference [ .setup-virtual-env, before_script ]
+  script:
+    - python -m pytest -vs back_tests/tests/test.py
+  rules:
+    - if: $TRIGGER_TEST =~ /.*requestbin-api.*/
