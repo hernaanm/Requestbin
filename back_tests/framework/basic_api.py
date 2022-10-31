@@ -1,9 +1,10 @@
 import requests
 import logging
 import json
+import os
 from jsonschema import validate
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = os.environ.get("BASE_URL")
 JSON_STORE_PATH = "back_tests/json_store/"
 
 log = logging.getLogger("BASIC_API")

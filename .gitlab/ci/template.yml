@@ -1,0 +1,32 @@
+.install-docker:
+  before_script:
+    - apt-get update
+    - apt-get -y upgrade
+    - apt-get -y install curl
+    - apt-get install -y lsb-release ca-certificates apt-transport-https software-properties-common
+    - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+    - apt-get update
+    - apt-get -y install docker-ce
+
+.install-docker-compose:
+  before_script:
+    - apt-get update
+    - apt-get -y install curl
+    - curl -L "https://github.com/docker/compose/releases/download/v2.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    - mv /usr/local/bin/docker-compose /usr/bin/docker-compose
+    - chmod +x /usr/bin/docker-compose
+  
+.deploy-requestbin-container:
+  before_script:
+    - docker-compose -f docker-compose.yml build
+    - docker-compose up -d
+
+.setup-virtual-env:
+  before_script:
+    - apt-get -y install python3
+    - apt-get -y install python3-pip
+    - pip install virtualenv
+    - virtualenv backend_venv
+    - source backend_venv/bin/activate
+    - pip install -r back_tests/requirements.txt

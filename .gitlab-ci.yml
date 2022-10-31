@@ -1,0 +1,13 @@
+include:
+  - local: .gitlab/ci/**.yml
+
+default:
+  image: ubuntu:22.04
+
+cache:
+  paths:
+    - target/
+
+stages:
+  - test
+

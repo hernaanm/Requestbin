@@ -7,7 +7,7 @@ services:
         links:
             - redis
         ports:
-            - "8000:8000"
+            - "8888:8888"
 
     redis:
         image: redis
